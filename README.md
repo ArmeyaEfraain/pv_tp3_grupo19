@@ -1,3 +1,11 @@
+## INTEGRANTES DEL GRUPO
+1. Gutierrez, Ignacio Valentin - GitHub: @IgnacioG04
+2. Mamani, Elias Alberto - GitHub: @EliasAM-apu
+3. Alavar, Barbara Luisana - GitHub: @Barr09
+4. Armeya, Efrain - GitHub: @ArmeyaEfraain
+5. Farfan, Elio Agustin - GitHub: @agustinfarfan90
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
