@@ -1,5 +1,5 @@
 
-const proyectoService = (() => {
+export const proyectoService = (() => {
   // arreglo de proyectos 
   let proyectos = [
     { id: 1, titulo: "Proyecto Alpha", categoria: "Desarrollo", estado: "Pendiente" },
