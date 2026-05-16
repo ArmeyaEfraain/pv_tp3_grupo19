@@ -7,7 +7,7 @@ const ListaProyectos = () => {
 
   const handleEliminar = (id) => {
     proyectoService.eliminarProyecto(id);
-    setProyectos(proyectoService.obtenerProyectos()); // Actualizamos el estado
+    setProyectos(proyectoService.obtenerProyectos()); 
   };
 
   const handleBuscar = (e) => {
