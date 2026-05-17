@@ -12,7 +12,6 @@ function App() {
       <Header />
       <Nav />
       <main id="center">
-        {/* Aquí es donde vive tu componente */}
         <ListaProyectos />
       </main>
       <Footer />
