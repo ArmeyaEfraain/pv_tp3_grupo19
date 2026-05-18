@@ -10,6 +10,29 @@ import proyectoService from './services/proyectoService';
 import './css/styles.css';
 
 function App() {
+  const [proyectos, setProyectos] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
+
+  useEffect(() => {
+    setProyectos(proyectoService.obtenerProyectos());
+  }, []);
+
+  const handleEliminar = (id) => {
+    proyectoService.eliminarProyecto(id);
+    setProyectos(proyectoService.buscarProyecto(busqueda));
+  };
+
+  const handleBusqueda = (texto) => {
+    setBusqueda(texto);
+    setProyectos(proyectoService.buscarProyecto(texto));
+  };
+
+  const handleAgregar = (nuevoProyecto) => {
+    proyectoService.agregarProyecto(nuevoProyecto);
+    setProyectos(proyectoService.obtenerProyectos());
+    setBusqueda('');
+  };
+
 
   const [proyectos, setProyectos] = useState([]);
 
@@ -24,6 +47,13 @@ function App() {
       <Nav />
 
       <main id="center">
+        <ListaProyectos
+          proyectos={proyectos}
+          onEliminar={handleEliminar}
+          onBusqueda={handleBusqueda}
+          onAgregar={handleAgregar}
+          busqueda={busqueda}
+        />
         <ListaProyectos proyectos={proyectos} />
       </main>
 
