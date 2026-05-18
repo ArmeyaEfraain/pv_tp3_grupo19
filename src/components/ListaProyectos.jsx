@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ProyectoCard from './ProyectoCard';
 
-const ListaProyectos = ({ proyectos, onEliminar, onBusqueda, onAgregar, busqueda }) => {
+const ListaProyectos = ({ proyectos, onEliminar, onVerDetalle, onBusqueda, onAgregar, busqueda }) => {
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
     categoria: '',
@@ -59,7 +59,6 @@ const ListaProyectos = ({ proyectos, onEliminar, onBusqueda, onAgregar, busqueda
         </select>
         <button onClick={handleAgregar}>Agregar</button>
       </div>
-
       {/* Lista */}
       <div className="proyectos-grid">
         {proyectos.length === 0 ? (
@@ -70,6 +69,7 @@ const ListaProyectos = ({ proyectos, onEliminar, onBusqueda, onAgregar, busqueda
               key={proy.id}
               proyecto={proy}
               onEliminar={onEliminar}
+              onVerDetalle={onVerDetalle}
             />
           ))
         )}

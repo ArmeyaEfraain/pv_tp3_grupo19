@@ -1,21 +1,23 @@
 import { useState, useEffect } from 'react';
-
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import ListaProyectos from './components/ListaProyectos';
-
-import proyectoService from './services/proyectoService';
-
+import DetalleProyecto from './components/DetalleProyecto'; // Importación nueva
+import { proyectoService } from './services/proyectoService';
 import './css/styles.css';
 
 function App() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null); // Estado nuevo
 
   useEffect(() => {
     setProyectos(proyectoService.obtenerProyectos());
   }, []);
+
+  const handleVerDetalle = (proyecto) => setProyectoSeleccionado(proyecto);
+  const handleCerrarDetalle = () => setProyectoSeleccionado(null);
 
   const handleEliminar = (id) => {
     proyectoService.eliminarProyecto(id);
@@ -27,36 +29,32 @@ function App() {
     setProyectos(proyectoService.buscarProyecto(texto));
   };
 
-  const handleAgregar = (nuevoProyecto) => {
-    proyectoService.agregarProyecto(nuevoProyecto);
+  const handleAgregar = (nuevo) => {
+    proyectoService.agregarProyecto(nuevo);
     setProyectos(proyectoService.obtenerProyectos());
-    setBusqueda('');
   };
-
-
-  const [proyectos, setProyectos] = useState([]);
-
-  useEffect(() => {
-    const datos = proyectoService.obtenerProyectos();
-    setProyectos(datos);
-  }, []);
 
   return (
     <>
       <Header />
       <Nav />
-
       <main id="center">
         <ListaProyectos
           proyectos={proyectos}
           onEliminar={handleEliminar}
+          onVerDetalle={handleVerDetalle} // Prop nueva
           onBusqueda={handleBusqueda}
           onAgregar={handleAgregar}
           busqueda={busqueda}
+          onVerDetalle={handleVerDetalle}
         />
-        <ListaProyectos proyectos={proyectos} />
+        {proyectoSeleccionado && (
+          <DetalleProyecto 
+            proyecto={proyectoSeleccionado} 
+            onCerrar={handleCerrarDetalle} 
+          />
+        )}
       </main>
-
       <Footer />
     </>
   );
