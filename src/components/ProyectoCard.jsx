@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProyectoCard = ({ proyecto, onEliminar }) => {
+const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle }) => {
   
   const { id, titulo, categoria, estado } = proyecto;
 
@@ -12,7 +12,7 @@ const ProyectoCard = ({ proyecto, onEliminar }) => {
       
       <div className="acciones">
         <button onClick={() => onEliminar(id)}>Eliminar</button>
-        <button>Ver Detalle</button>
+        <button onClick={() => onVerDetalle(proyecto)}>Ver Detalle</button>
       </div>
     </div>
   );
