@@ -46,6 +46,7 @@ function App() {
           onBusqueda={handleBusqueda}
           onAgregar={handleAgregar}
           busqueda={busqueda}
+          onVerDetalle={handleVerDetalle}
         />
         {proyectoSeleccionado && (
           <DetalleProyecto 
