@@ -1,24 +1,22 @@
 import React from 'react';
 import ProyectoCard from './ProyectoCard';
+import FormularioProyecto from './FormularioProyecto';
 
-const ListaProyectos = ({ proyectos, onEliminar }) => {
+const ListaProyectos = ({ proyectos, onEliminar, onAgregar }) => {
   return (
-    <div className="lista-container">
-      <h2>Gestión de Proyectos</h2>
-      <div className="proyectos-grid">
-        {proyectos.length === 0 ? (
-          <p>No hay proyectos disponibles.</p>
-        ) : (
-          proyectos.map((proy) => (
-            <ProyectoCard 
-              key={proy.id} 
-              proyecto={proy} 
-              onEliminar={onEliminar} 
-            />
-          ))
-        )}
+    <main>
+      <FormularioProyecto onAgregar={onAgregar} />
+
+      <div className="lista-container">
+        {proyectos.map((proy) => (
+          <ProyectoCard 
+            key={proy.id} 
+            proyecto={proy} 
+            onEliminar={onEliminar} 
+          />
+        ))}
       </div>
-    </div>
+    </main>
   );
 };
 
