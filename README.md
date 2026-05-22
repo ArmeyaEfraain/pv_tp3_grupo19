@@ -1,10 +1,35 @@
-## INTEGRANTES DEL GRUPO
-1. Gutierrez, Ignacio Valentin - GitHub: @IgnacioG04
-2. Mamani, Elias Alberto - GitHub: @EliasAM-apu
-3. Alavar, Barbara Luisana - GitHub: @Barr09
-4. Armeya, Efrain - GitHub: @ArmeyaEfraain
-5. Farfan, Elio Agustin - GitHub: @agustinfarfan90
+# Trabajo Práctico N° 3 : React
+**Materia:** Programación Visual  
+**Grupo:** 19  
 
+## Integrantes
+* Mamani, Elias Alberto (Layout y Documentación) - GitHub: @EliasAM-apu
+* Farfan, Elio Agustin (Estructura de Componentes) - GitHub: @agustinfarfan90
+* Alavar, Barbara Luisana (Lógica e Interactividad) - GitHub: @Barr09
+* Armeya, Efraín (Estado Global y Git) - GitHub: @ArmeyaEfraain
+
+## Descripción del Proyecto
+Esta aplicación es un Dashboard de Gestión de Proyectos desarrollado con **React** y **Vite**. En esta segunda etapa, nos enfocamos en la arquitectura de componentes y la comunicación fluida de datos.
+
+## Tecnologías Utilizadas
+* **React**
+* **Vite** 
+* **JavaScript**
+* **CSS** 
+
+## Conceptos Clave Aplicados (Parte 2)
+
+### 1. Comunicación entre Componentes (Props)
+Implementamos un flujo de datos unidireccional. El componente principal `App.jsx` actúa como el "cerebro", enviando información a través de **props** a los componentes hijos como `ListaProyectos` y `ProyectoCard`.
+
+### 2. Levantamiento de Estado (Lifting State Up)
+Para permitir que la acción de "Ver Detalle" en una tarjeta (`ProyectoCard`) abra un componente hermano (`DetalleProyecto`), elevamos el estado al ancestro común más cercano (`App.jsx`).
+
+### 3. Desestructuración de Objetos
+Siguiendo las buenas prácticas, utilizamos desestructuración tanto en los argumentos de los componentes como en el manejo de estados, logrando un código más limpio y legible.
+
+### 4. Renderizado Dinámico y Keys
+La lista de proyectos se genera dinámicamente mediante el método `.map()`, asignando una `key` única a cada elemento para optimizar el rendimiento del Virtual DOM de React.
 
 # React + Vite
 

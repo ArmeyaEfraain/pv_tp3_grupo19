@@ -2,7 +2,16 @@
 export const proyectoService = (() => {
   // arreglo de proyectos 
   let proyectos = [
-    { id: 1, titulo: "Proyecto Alpha", categoria: "Desarrollo", estado: "Pendiente" },
+    { id: 1, titulo: "Proyecto Alpha",
+      categoria: "Desarrollo",
+      estado: "Pendiente",
+      descripcionLarga: "Este proyecto busca revolucionar la gestión de tareas mediante una interfaz intuitiva. Se enfoca en la usabilidad y la velocidad de respuesta en dispositivos móviles.\n\nLa segunda fase contempla la integración con calendarios externos y un sistema de notificaciones inteligentes.",
+      recursos: { github: "https://github.com", drive: "https://drive.google.com", pdf: "#" },
+      equipo: [
+      { nombre: "Elias", rol: "Frontend" },
+      { nombre: "Agustin", rol: "Backend" }
+      ]
+    },
     { id: 2, titulo: "Proyecto Beta", categoria: "Investigación", estado: "En progreso" },
     { id: 3, titulo: "Proyecto Gamma", categoria: "Diseño", estado: "Completado" },
     { id: 4, titulo: "Proyecto Delta", categoria: "Mantenimiento", estado: "Pendiente" },
@@ -11,7 +20,9 @@ export const proyectoService = (() => {
 
   // funcion para obtener una copia del arreglo actual
   const obtenerProyectos = () => [...proyectos];
-
+  
+  const obtenerProyectoPorId = (id) => proyectos.find(p => p.id === id);
+  
   // funcion para agregar un proyecto al arreglo
   const agregarProyecto = (nuevoProyecto) => {
     // genera id unico (maximo id + 1)
@@ -41,6 +52,7 @@ export const proyectoService = (() => {
   // exporta lo necesario
   return {
     obtenerProyectos,
+    obtenerProyectoPorId,
     agregarProyecto,
     eliminarProyecto,
     buscarProyecto
