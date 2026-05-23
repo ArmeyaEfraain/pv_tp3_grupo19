@@ -1,20 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import ListaProyectos from './components/ListaProyectos';
-import DetalleProyecto from './components/DetalleProyecto'; // Importación nueva
-import { proyectoService } from './services/proyectoService';
+import DetalleProyecto from './components/DetalleProyecto';
+import proyectoService from './services/proyectoService';
 import './css/styles.css';
 
 function App() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null); // Estado nuevo
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+  const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
+
+  const primerRender = useRef(true);
 
   useEffect(() => {
     setProyectos(proyectoService.obtenerProyectos());
   }, []);
+
+  useEffect(() => {
+    if (primerRender.current) {
+      primerRender.current = false;
+      return;
+    }
+
+    setUltimaActualizacion(new Date());
+  }, [proyectos]);
 
   const handleVerDetalle = (proyecto) => setProyectoSeleccionado(proyecto);
   const handleCerrarDetalle = () => setProyectoSeleccionado(null);
@@ -42,16 +54,16 @@ function App() {
         <ListaProyectos
           proyectos={proyectos}
           onEliminar={handleEliminar}
-          onVerDetalle={handleVerDetalle} // Prop nueva
           onBusqueda={handleBusqueda}
           onAgregar={handleAgregar}
           busqueda={busqueda}
           onVerDetalle={handleVerDetalle}
         />
+
         {proyectoSeleccionado && (
-          <DetalleProyecto 
-            proyecto={proyectoSeleccionado} 
-            onCerrar={handleCerrarDetalle} 
+          <DetalleProyecto
+            proyecto={proyectoSeleccionado}
+            onCerrar={handleCerrarDetalle}
           />
         )}
       </main>
