@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import ListaProyectos from './components/ListaProyectos';
 import DetalleProyecto from './components/DetalleProyecto';
 import proyectoService from './services/proyectoService';
+import RegistroActividad from './components/RegistroActividad';
 import './css/styles.css';
 
 function App() {
@@ -38,13 +39,16 @@ function App() {
 
   const handleBusqueda = (texto) => {
     setBusqueda(texto);
-    setProyectos(proyectoService.buscarProyecto(texto));
   };
 
   const handleAgregar = (nuevo) => {
     proyectoService.agregarProyecto(nuevo);
     setProyectos(proyectoService.obtenerProyectos());
   };
+  
+  const proyectosFiltrados = proyectos.filter((proy) =>
+    proy.titulo.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
   return (
     <>
@@ -52,13 +56,15 @@ function App() {
       <Nav />
       <main id="center">
         <ListaProyectos
-          proyectos={proyectos}
+          proyectos={proyectosFiltrados}
           onEliminar={handleEliminar}
           onBusqueda={handleBusqueda}
           onAgregar={handleAgregar}
           busqueda={busqueda}
           onVerDetalle={handleVerDetalle}
         />
+
+        <RegistroActividad fecha={ultimaActualizacion} />
 
         {proyectoSeleccionado && (
           <DetalleProyecto

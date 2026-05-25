@@ -31,6 +31,21 @@ Siguiendo las buenas prácticas, utilizamos desestructuración tanto en los argu
 ### 4. Renderizado Dinámico y Keys
 La lista de proyectos se genera dinámicamente mediante el método `.map()`, asignando una `key` única a cada elemento para optimizar el rendimiento del Virtual DOM de React.
 
+## Actualización: TP3 - Parte 3 (Efectos Secundarios y Optimización)
+
+En esta tercera iteración, el **Grupo 19** se enfocó en el ciclo de vida de los componentes, la sincronización con sistemas externos y la refactorización de la UI. 
+
+### 1. Refactorización y Responsabilidad Única
+Se extrajo la lógica de creación de proyectos hacia un nuevo componente independiente `<FormularioProyecto />`. Este componente gestiona su propio estado local controlado (inputs) y se comunica con el componente padre mediante una función callback (`onAgregar`), elevando el estado del nuevo objeto creado de forma limpia.
+
+### 2. Control de Efectos Secundarios (`useEffect` y `useRef`)
+Implementamos un componente `<RegistroActividad />` para visualizar la fecha de la última modificación en la lista.
+* **Sincronización:** Utilizamos `useEffect` con un arreglo de dependencias atado exclusivamente a la longitud del estado `proyectos`, capturando el objeto `Date` solo ante altas o bajas.
+* **Control de Montaje Inicial:** Para cumplir con la restricción de no mostrar el registro al cargar la página por primera vez, implementamos el hook `useRef` como una bandera mutable (`flag`). Esto nos permitió saltar el primer renderizado sin provocar re-renderizados innecesarios.
+
+### 3. Aislamiento del Filtro (Estado Derivado)
+Al detectar que la función de búsqueda alteraba el estado original y disparaba el efecto de la fecha, aplicamos el patrón de **Estado Derivado**. Eliminamos la mutación del estado `proyectos` durante la búsqueda; en su lugar, filtramos el arreglo original dinámicamente durante la fase de renderizado. Esto garantizó el aislamiento total del filtro, evitando efectos secundarios no deseados.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

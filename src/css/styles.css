@@ -441,3 +441,40 @@ button, .btn-primary, .btn-secondary {
     border-top: 1px solid var(--border-color);
     padding-top: 1rem;
 }
+/* --- Estilos del Buscador Restaurado --- */
+.buscador-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.buscador-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.buscador-input:focus {
+    border-color: #f72585; /* O el color principal que uses */
+}
+/* --- Estilos para el Registro de Actividad --- */
+.registro-actividad-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa; 
+    border-top: 2px dashed #dee2e6; 
+    text-align: center;
+    border-radius: var(--border-radius, 8px); 
+}
+
+.registro-actividad-texto {
+    color: #6c757d; 
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+}
