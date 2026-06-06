@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ProyectoCard from './ProyectoCard';
-import FormularioProyecto from './FormularioProyecto';
+import ProyectoCard from '../components/ProyectoCard';
+import FormularioProyecto from '../components/FormularioProyecto';
 
 const ListaProyectos = ({ proyectos, onEliminar, onAgregar, onVerDetalle, busqueda, onBusqueda}) => {
   return (

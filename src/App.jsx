@@ -1,11 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import ListaProyectos from './components/ListaProyectos';
-import DetalleProyecto from './components/DetalleProyecto';
-import proyectoService from './services/proyectoService';
 import RegistroActividad from './components/RegistroActividad';
+
+import ListaProyectos from './views/ListaProyectos';
+import DetalleProyecto from './views/DetalleProyecto';
+import Perfil from './views/Perfil';
+
+import proyectoService from './services/proyectoService';
 import './css/styles.css';
 
 function App() {
@@ -25,7 +30,6 @@ function App() {
       primerRender.current = false;
       return;
     }
-
     setUltimaActualizacion(new Date());
   }, [proyectos]);
 
@@ -45,36 +49,63 @@ function App() {
     proyectoService.agregarProyecto(nuevo);
     setProyectos(proyectoService.obtenerProyectos());
   };
-  
+
   const proyectosFiltrados = proyectos.filter((proy) =>
     proy.titulo.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
-    <>
+    <Router>
       <Header />
       <Nav />
+      
       <main id="center">
-        <ListaProyectos
-          proyectos={proyectosFiltrados}
-          onEliminar={handleEliminar}
-          onBusqueda={handleBusqueda}
-          onAgregar={handleAgregar}
-          busqueda={busqueda}
-          onVerDetalle={handleVerDetalle}
-        />
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <ListaProyectos
+                proyectos={proyectosFiltrados}
+                onEliminar={handleEliminar}
+                onBusqueda={handleBusqueda}
+                onAgregar={handleAgregar}
+                busqueda={busqueda}
+                onVerDetalle={handleVerDetalle}
+              />
+            } 
+          />
+
+          <Route 
+            path="/proyectos" 
+            element={
+              <ListaProyectos
+                proyectos={proyectosFiltrados}
+                onEliminar={handleEliminar}
+                onBusqueda={handleBusqueda}
+                onAgregar={handleAgregar}
+                busqueda={busqueda}
+                onVerDetalle={handleVerDetalle}
+              />
+            } 
+          />
+
+          <Route 
+            path="/proyectos/:id" 
+            element={
+              <DetalleProyecto 
+                proyecto={proyectoSeleccionado} 
+                onCerrar={handleCerrarDetalle} 
+              />
+            } 
+          />
+          <Route path="/perfil" element={<Perfil />} />
+        </Routes>
 
         <RegistroActividad fecha={ultimaActualizacion} />
-
-        {proyectoSeleccionado && (
-          <DetalleProyecto
-            proyecto={proyectoSeleccionado}
-            onCerrar={handleCerrarDetalle}
-          />
-        )}
       </main>
+
       <Footer />
-    </>
+    </Router>
   );
 }
 
