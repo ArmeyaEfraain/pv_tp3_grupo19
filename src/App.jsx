@@ -16,7 +16,6 @@ import './css/styles.css';
 function App() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
 
   const primerRender = useRef(true);
@@ -33,8 +32,6 @@ function App() {
     setUltimaActualizacion(new Date());
   }, [proyectos]);
 
-  const handleVerDetalle = (proyecto) => setProyectoSeleccionado(proyecto);
-  const handleCerrarDetalle = () => setProyectoSeleccionado(null);
 
   const handleEliminar = (id) => {
     proyectoService.eliminarProyecto(id);
@@ -70,7 +67,6 @@ function App() {
                 onBusqueda={handleBusqueda}
                 onAgregar={handleAgregar}
                 busqueda={busqueda}
-                onVerDetalle={handleVerDetalle}
               />
             } 
           />
@@ -84,19 +80,13 @@ function App() {
                 onBusqueda={handleBusqueda}
                 onAgregar={handleAgregar}
                 busqueda={busqueda}
-                onVerDetalle={handleVerDetalle}
               />
             } 
           />
 
           <Route 
             path="/proyectos/:id" 
-            element={
-              <DetalleProyecto 
-                proyecto={proyectoSeleccionado} 
-                onCerrar={handleCerrarDetalle} 
-              />
-            } 
+            element={ <DetalleProyecto /> }
           />
           <Route path="/perfil" element={<Perfil />} />
         </Routes>
