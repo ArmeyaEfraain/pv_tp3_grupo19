@@ -5,7 +5,6 @@
 ## Integrantes
 * Mamani, Elias Alberto (Layout y Documentación) - GitHub: @EliasAM-apu
 * Farfan, Elio Agustin (Estructura de Componentes) - GitHub: @agustinfarfan90
-* Alavar, Barbara Luisana (Lógica e Interactividad) - GitHub: @Barr09
 * Armeya, Efraín (Estado Global y Git) - GitHub: @ArmeyaEfraain
 
 ## Descripción del Proyecto
@@ -45,6 +44,32 @@ Implementamos un componente `<RegistroActividad />` para visualizar la fecha de 
 
 ### 3. Aislamiento del Filtro (Estado Derivado)
 Al detectar que la función de búsqueda alteraba el estado original y disparaba el efecto de la fecha, aplicamos el patrón de **Estado Derivado**. Eliminamos la mutación del estado `proyectos` durante la búsqueda; en su lugar, filtramos el arreglo original dinámicamente durante la fase de renderizado. Esto garantizó el aislamiento total del filtro, evitando efectos secundarios no deseados.
+
+##  Actualización: Trabajo Práctico N° 3 - Parte 4 (Refactorización a SPA y Material UI)
+
+En esta última fase del proyecto, el Dashboard de Gestión Educativa fue migrado exitosamente de una interfaz estática a una **Single Page Application (SPA)**. Se implementaron cambios profundos en la arquitectura de carpetas, el enrutamiento y el diseño visual para cumplir con los estándares modernos de desarrollo en React.
+
+###  Nuevas Tecnologías Implementadas
+* **React Router DOM (v6):** Implementado para gestionar la navegación del lado del cliente sin recargar la página.
+* **Material UI (MUI):** Adoptado como framework principal de componentes para modernizar la interfaz gráfica de usuario (UI).
+
+###  Reestructuración Arquitectónica
+El código fuente (`src/`) fue reorganizado aplicando el principio de separación de responsabilidades:
+* `/views`: Contiene los componentes de nivel de página (pantallas completas) enrutables.
+* `/components`: Contiene los bloques de construcción reutilizables y aislados.
+
+###  Funcionalidades y Vistas Agregadas
+1. **Enrutamiento Dinámico:**
+   * La navegación principal se gestiona a través de componentes `<Link>` en el menú superior, permitiendo transiciones instantáneas.
+   * Se implementó el hook `useParams` para la vista `<DetalleProyecto />` (`/proyectos/:id`). Esto permite que el estado de la vista dependa directamente de la URL, permitiendo al usuario compartir el enlace o recargar la página (F5) sin perder el contexto del proyecto.
+2. **Nuevas Vistas (Views):**
+   * `<Dashboard />` (`/` o `/dashboard`): Pantalla de bienvenida construida con contenedores de MUI que exhibe tarjetas de métricas del sistema.
+   * `<PerfilUsuario />` (`/perfil`): Pantalla que muestra elegantemente la información académica y el rol del integrante en el equipo utilizando el componente `Paper` de MUI.
+3. **Refactorización Visual (MUI):**
+   * **Tarjetas:** Se migró la estructura base a componentes `<Card>` y `<CardContent>`.
+   * **Formularios:** Se reemplazaron los inputs nativos por el componente `<TextField>` (incluyendo soporte para selectores).
+   * **Notificaciones:** El registro de actividad inferior ahora utiliza el componente `<Alert>` para integrarse armónicamente con el diseño.
+   * **Distribución:** Se aplicó el sistema de rejilla (`<Grid>`) para lograr un diseño responsivo en la galería de proyectos.
 
 # React + Vite
 

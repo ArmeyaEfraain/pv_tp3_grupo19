@@ -9,6 +9,7 @@ import RegistroActividad from './components/RegistroActividad';
 import ListaProyectos from './views/ListaProyectos';
 import DetalleProyecto from './views/DetalleProyecto';
 import Perfil from './views/Perfil';
+import Dashboard from './views/Dashboard';
 
 import proyectoService from './services/proyectoService';
 import './css/styles.css';
@@ -60,16 +61,9 @@ function App() {
         <Routes>
           <Route 
             path="/" 
-            element={
-              <ListaProyectos
-                proyectos={proyectosFiltrados}
-                onEliminar={handleEliminar}
-                onBusqueda={handleBusqueda}
-                onAgregar={handleAgregar}
-                busqueda={busqueda}
-              />
-            } 
-          />
+            element={<Dashboard/>} 
+            />
+          <Route path="/dashboard" element={<Dashboard />}/>
 
           <Route 
             path="/proyectos" 

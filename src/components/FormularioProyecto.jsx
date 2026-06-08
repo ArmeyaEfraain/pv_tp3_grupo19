@@ -1,65 +1,104 @@
 import React, { useState } from 'react';
+import { Paper, Stack, TextField, Button, MenuItem, Typography, Box } from '@mui/material';
 
 const FormularioProyecto = ({ onAgregar }) => {
-  const [nuevoProyecto, setNuevoProyecto] = useState({
-    titulo: '',
-    categoria: '',
-    estado: 'Pendiente'
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNuevoProyecto({ ...nuevoProyecto, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
     
-    if (!nuevoProyecto.titulo.trim()) {
-      alert("Por favor, escribe un título");
-      return;
-    }
-
-    onAgregar(nuevoProyecto);
-
-    setNuevoProyecto({
-      titulo: '',
-      categoria: '',
-      estado: 'Pendiente'
+    const [nuevoProyecto, setNuevoProyecto] = useState({
+        titulo: '',
+        categoria: '',
+        estado: 'Pendiente'
     });
-  };
 
-  return (
-    <section className="formulario-seccion">
-      <h3>Crear Nuevo Proyecto</h3>
-      <form onSubmit={handleSubmit} className="formulario-proyecto">
-        <input
-          type="text"
-          name="titulo"
-          placeholder="Nombre del Proyecto"
-          value={nuevoProyecto.titulo}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="categoria"
-          placeholder="Categoría (Ej: Web, Mobile)"
-          value={nuevoProyecto.categoria}
-          onChange={handleChange}
-        />
-        <select 
-          name="estado" 
-          value={nuevoProyecto.estado} 
-          onChange={handleChange}
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNuevoProyecto({ ...nuevoProyecto, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        if (!nuevoProyecto.titulo.trim()) {
+            alert("Por favor, escribe un título");
+            return;
+        }
+
+        onAgregar({
+            ...nuevoProyecto,
+            id: Date.now() 
+        });
+
+        setNuevoProyecto({
+            titulo: '',
+            categoria: '',
+            estado: 'Pendiente'
+        });
+    };
+
+    return (
+        <Paper 
+            component="form" 
+            elevation={0} 
+            onSubmit={handleSubmit}
+            sx={{ 
+                p: 3, 
+                borderRadius: 3, 
+                backgroundColor: '#fff8e1', 
+                border: '1px solid #ffe082',
+                mb: 4
+            }}
         >
-          <option value="Pendiente">Pendiente</option>
-          <option value="En Progreso">En Progreso</option>
-          <option value="Completado">Completado</option>
-        </select>
-        <button type="submit">Guardar Proyecto</button>
-      </form>
-    </section>
-  );
+            <Box sx={{ mb: 2 }}>
+                <Typography variant="h6" fontWeight="bold" color="text.primary">
+                    Crear Nuevo Proyecto
+                </Typography>
+            </Box>
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                
+                <TextField 
+                    fullWidth 
+                    label="Nombre del Proyecto" 
+                    name="titulo"
+                    variant="outlined" 
+                    value={nuevoProyecto.titulo}
+                    onChange={handleChange}
+                />
+                
+                <TextField 
+                    fullWidth 
+                    label="Categoría (Ej: Web, Mobile)" 
+                    name="categoria"
+                    variant="outlined" 
+                    value={nuevoProyecto.categoria}
+                    onChange={handleChange}
+                />
+
+                <TextField
+                    select
+                    label="Estado"
+                    name="estado"
+                    value={nuevoProyecto.estado}
+                    onChange={handleChange}
+                    sx={{ minWidth: '150px' }}
+                >
+                    <MenuItem value="Pendiente">Pendiente</MenuItem>
+                    <MenuItem value="En progreso">En progreso</MenuItem>
+                    <MenuItem value="Completado">Completado</MenuItem>
+                </TextField>
+
+                <Button 
+                    type="submit" 
+                    variant="contained" 
+                    color="warning" 
+                    size="large"
+                    sx={{ minWidth: '220px', fontWeight: 'bold' }}
+                >
+                    Guardar Proyecto
+                </Button>
+
+            </Stack>
+        </Paper>
+    );
 };
 
 export default FormularioProyecto;
