@@ -21,7 +21,7 @@ export const proyectoService = (() => {
   // funcion para obtener una copia del arreglo actual
   const obtenerProyectos = () => [...proyectos];
   
-  const obtenerProyectoPorId = (id) => proyectos.find(p => p.id === id);
+  const obtenerProyectoPorId = (id) => proyectos.find(p => p.id === Number(id));
   
   // funcion para agregar un proyecto al arreglo
   const agregarProyecto = (nuevoProyecto) => {
