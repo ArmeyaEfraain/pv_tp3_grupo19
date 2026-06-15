@@ -71,6 +71,13 @@ El código fuente (`src/`) fue reorganizado aplicando el principio de separació
    * **Notificaciones:** El registro de actividad inferior ahora utiliza el componente `<Alert>` para integrarse armónicamente con el diseño.
    * **Distribución:** Se aplicó el sistema de rejilla (`<Grid>`) para lograr un diseño responsivo en la galería de proyectos.
 
+### 🔄 Actualización: Trabajo Práctico N° 3 - Parte 5 (Estado Global y Persistencia)
+
+En esta fase, el equipo implementó la gestión de estado global para eliminar el *Prop Drilling* y simular la sesión de un usuario.
+
+* **Context API (`UsuarioContext`):** Se creó un proveedor de contexto que distribuye los datos del perfil (nombre, DNI, rol, institución) a componentes aislados como el `<Header />` y el `<Perfil />`. Esto permite que la interfaz reaccione y se actualice simultáneamente al editar la información sin necesidad de pasar *props* manualmente.
+* **Persistencia con LocalStorage:** Se incorporó el hook `useEffect` en el proveedor para escuchar los cambios del objeto usuario y guardarlos automáticamente en el almacenamiento local del navegador (`localStorage`). Al recargar la página (F5), el contexto recupera estos datos convirtiéndolos desde JSON, evitando que el estado se reinicie a sus valores por defecto.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

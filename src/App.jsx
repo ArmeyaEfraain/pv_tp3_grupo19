@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import RegistroActividad from './components/RegistroActividad';
+import { UsuarioProvider } from './context/UsuarioContext';
 
 import ListaProyectos from './views/ListaProyectos';
 import DetalleProyecto from './views/DetalleProyecto';
@@ -53,6 +54,7 @@ function App() {
   );
 
   return (
+   <UsuarioProvider>
     <Router>
       <Header />
       <Nav />
@@ -89,7 +91,8 @@ function App() {
       </main>
 
       <Footer />
-    </Router>
+     </Router>
+    </UsuarioProvider>
   );
 }
 
